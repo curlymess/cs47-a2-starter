@@ -1,12 +1,23 @@
 import AppLoading from 'expo-app-loading';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, Platform } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Themes } from './assets/Themes';
+import Profiles from './assets/Themes';
+import Footer from './app/components/Footer';
+import Header from './app/components/Header';
+import Body from './app/components/Body';
+import themes from './assets/Themes/themes';
+
+const mtlProfile = {
+  profileName: 'MTL',
+//  profileImg: '../assets/Profiles/mtl.jpg',
+  profileCaption: '1 mile away',
+};
 
 export default function App() {
   let [fontsLoaded] = useFonts({
     Sydney: require('./assets/Fonts/Sydney-Serial-Regular.ttf'),
-    'Sydney-Bold': require('./assets/Fonts/Sydney-Serial-Bold.ttf'),
+    SydneyBold: require('./assets/Fonts/Sydney-Serial-Bold.ttf'),
   });
   if (!fontsLoaded) return <AppLoading />;
   /* ^Don't mind/edit the code above, it's there to load the font for you! */
@@ -17,18 +28,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text
-        style={{
-          fontFamily: 'Sydney', // test to see if the font is loaded, feel free to remove this
-        }}>
-        Open up App.js to start working on your app!
-      </Text>
-      <Text
-        style={{
-          fontFamily: 'Sydney-Bold', // test to see if the font is loaded, feel free to remove this
-        }}>
-        ~Good luck~
-      </Text>
+      <View style={styles.flex}>
+      <Header />
+      
+      <Body
+        profileName={mtlProfile.profileName}
+        profileImg={mtlProfile.profileImg}
+        profileCaption={mtlProfile.profileCaption}
+      />
+
+      <Footer />
+      
+
+      </View>     
     </View>
   );
 }
@@ -36,8 +48,18 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: themes.light.bg,
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  flex: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    width: '100%',
+    marginBottom: 0,
+    marginTop: 20,
+  },  
+  
 });
