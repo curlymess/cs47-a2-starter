@@ -51,14 +51,17 @@ describe('Header', () => {
   });
 
   it('ImageBackground has the right dimensions', () => {
+   try {
     expect(bodyBackgroundImage.props.style.width).toBeCloseTo({
-      value: width * 0.9,
-      percentage: 90,
+      value: width * 0.65,
     });
     expect(bodyBackgroundImage.props.style.height).toBeCloseTo({
-      value: height * 0.4,
-      percentage: 40,
+      value: (width * 0.65) *  1.1,
     });
+   }  catch (e) {
+    expect(bodyBackgroundImage.props.style.width).toBeGreaterThanOrEqual(width * 0.55);
+    expect(bodyBackgroundImage.props.style.height).toBeGreaterThanOrEqual((width * 0.55) *  1.1);
+   }
   });
 
   it('ImageBackground has rounded corners', () => {
